@@ -75,6 +75,15 @@ php artisan make:component buttons/br-button
 </x-buttons.br-button>
 ```
 
+### Variáveis Adicionais:
+
+Além de {{ $slot }}, que permite inserir o conteúdo do botão, você pode adicionar variáveis como:
+
+variant: Para aplicar diferentes estilos de botões (e.g., primary, secondary).
+type: Para definir o tipo de botão (e.g., button, submit).
+ariaLabel: Para fornecer uma descrição acessível do botão, especialmente útil para botões com ícones.
+
+
 **Dúvidas:**
 
 1. Essa abordagem usando Blade Components é recomendada para implementar o BRGOV-DS no Laravel?
