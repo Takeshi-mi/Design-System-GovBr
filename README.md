@@ -82,3 +82,6 @@ php artisan make:component buttons/br-button
 3. Como posso melhorar a personalização e reutilização desses componentes?
 
 Agradeço desde já pela ajuda e pelas sugestões!
+
+
+ps: Deixei no github porque não coube no fórum do discord com os exemplos. Lá na minha pergunta eu referencio esse repositório.
