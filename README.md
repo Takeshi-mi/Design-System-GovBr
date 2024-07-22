@@ -34,13 +34,13 @@ Para transformar esses botões em Blade Components, imaginei algo assim:
 1. **Criando o Componente Blade:**
 
 ```bash
-php artisan make:component buttons/br-button
+php artisan make:component Buttons/Br-button
 ```
 
 2. **Definindo o Componente Blade:**
 
 ```php
-// app/View/Components/Button.php
+// app/View/Components/Buttons/BrButton.php
 namespace App\View\Components;
 
 use Closure;
@@ -69,7 +69,7 @@ class Button extends Component
 ```
 ```
 php
-// resources/views/components/button.blade.php
+// resources/views/components/button/br-button.blade.php
 <button 
     type="{{ $type }}" 
     class="br-button {{ $variant }} {{ $attributes->get('class') }}"
