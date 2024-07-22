@@ -40,45 +40,67 @@ php artisan make:component buttons/br-button
 2. **Definindo o Componente Blade:**
 
 ```php
-// resources/views/components/buttons/br-button.blade.php
-@props([
-    'type' => 'button',
-    'class' => 'br-button',
-    'variant' => '',
-    'ariaLabel' => '',
-])
+// app/View/Components/Button.php
+namespace App\View\Components;
 
+use Closure;
+use Illuminate\Contracts\View\View;
+use Illuminate\View\Component;
+
+class Button extends Component
+{
+    /**
+     * Create a new component instance.
+     */
+    public function __construct(
+        public string $type = 'button',
+        public string $variant = 'primary',
+        public string $ariaLabel = ''
+    ){}
+
+    /**
+     * Get the view / contents that represent the component.
+     */
+    public function render(): View|Closure|string
+    {
+        return view('components.button');
+    }
+}
+```
+```
+php
+// resources/views/components/button.blade.php
 <button 
     type="{{ $type }}" 
-    class="{{ $class }} {{ $variant }} {{ $attributes->get('class') }}"
+    class="br-button {{ $variant }} {{ $attributes->get('class') }}"
     aria-label="{{ $ariaLabel }}"
     {{ $attributes }}
 >
     {{ $slot }}
+</button>
+
 </button>
 ```
 
 3. **Utilizando o Componente no Blade:**
 
 ```html
-<x-buttons.br-button variant="primary mr-3">Primário</x-buttons.br-button>
-<x-buttons.br-button variant="secondary mr-3">Secundário</x-buttons.br-button>
-<x-buttons.br-button>Terciário</x-buttons.br-button>
-<x-buttons.br-button variant="circle primary dark-mode mr-3" ariaLabel="Ícone ilustrativo">
+<x-button class="mr-3">Primário</x-button>
+<x-button type="submit" variant="secondary" class="mr-3">Secundário</x-button>
+<x-button>Terciário</x-button>
+<x-button variant="circle primary dark-mode" ariaLabel="Ícone ilustrativo" class="mr-3">
   <i class="fas fa-city" aria-hidden="true"></i>
-</x-buttons.br-button>
-<x-buttons.br-button variant="circle secondary dark-mode mr-3" ariaLabel="Ícone ilustrativo">
+</x-button>
+<x-button variant="circle secondary dark-mode" ariaLabel="Ícone ilustrativo" class="mr-3">
   <i class="fas fa-city" aria-hidden="true"></i>
-</x-buttons.br-button>
-<x-buttons.br-button variant="circle dark-mode" ariaLabel="Ícone ilustrativo">
+</x-button>
+<x-button variant="circle dark-mode" ariaLabel="Ícone ilustrativo">
   <i class="fas fa-city" aria-hidden="true"></i>
-</x-buttons.br-button>
+</x-button>
 ```
 
-### Variáveis Adicionais:
-
-Além de {{ $slot }}, que permite inserir o conteúdo do botão, você pode adicionar variáveis como:
-
+### Variáveis:
+{{ $slot }}: permite inserir o conteúdo do botão.
 variant: Para aplicar diferentes estilos de botões (e.g., primary, secondary).
 type: Para definir o tipo de botão (e.g., button, submit).
 ariaLabel: Para fornecer uma descrição acessível do botão, especialmente útil para botões com ícones.
